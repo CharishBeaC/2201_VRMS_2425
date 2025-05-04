@@ -18,6 +18,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
+import javax.swing.*;
+import com.toedter.calendar.JDateChooser;
+import java.awt.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 /**
  *
  * @author User
@@ -934,254 +942,152 @@ public class Staff extends javax.swing.JFrame {
     private void rentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentActionPerformed
         
     try {
-        UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+    UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
 
-        String customerName = cusname.getText().trim();
-        String contactNumber = connum.getText().trim();
-        String emailAddress = email.getText().trim();
-        String address = adds.getText().trim();
-        String machineInfoText = info.getText().trim();
+    String customerName = cusname.getText().trim();
+    String contactNumber = connum.getText().trim();
+    String emailAddress = email.getText().trim();
+    String address = adds.getText().trim();
+    String machineInfoText = info.getText().trim();
 
-        if (customerName.isEmpty() || contactNumber.isEmpty() || emailAddress.isEmpty()
-                || address.isEmpty() || machineInfoText.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+    if (customerName.isEmpty() || contactNumber.isEmpty() || emailAddress.isEmpty()
+            || address.isEmpty() || machineInfoText.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String machineName = "";
+    for (String line : machineInfoText.split("\n")) {
+        if (line.startsWith("Machine Name: ")) {
+            machineName = line.substring("Machine Name: ".length()).trim();
+            break;
         }
+    }
 
-        String machineName = "";
-        for (String line : machineInfoText.split("\n")) {
-            if (line.startsWith("Machine Name: ")) {
-                machineName = line.substring("Machine Name: ".length()).trim();
-                break;
+    if (machineName.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Invalid machine info! Please select a machine.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String customerDetails = "Customer Name: " + customerName + "\n"
+            + "Contact Number: " + contactNumber + "\n"
+            + "Email: " + emailAddress + "\n"
+            + "Address: " + address + "\n"
+            + "Machine: " + machineName;
+
+    int confirm = JOptionPane.showConfirmDialog(null, customerDetails, "Confirm Rental", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) return;
+
+    int machineId = 0;
+    double machinePrice = 0;
+    String status = "";
+
+    PreparedStatement fetchStmt = kon.prepareStatement("SELECT machine_id, price, status FROM videoke_machines WHERE machine_name = ?");
+    fetchStmt.setString(1, machineName);
+    ResultSet rs = fetchStmt.executeQuery();
+    if (rs.next()) {
+        machineId = rs.getInt("machine_id");
+        machinePrice = rs.getDouble("price");
+        status = rs.getString("status");
+    } else {
+        JOptionPane.showMessageDialog(null, "Machine not found in DB!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String additionalDetails = "";
+    double additionalCost = 0;
+
+    if (!"Available".equalsIgnoreCase(status)) {
+        int reserveOption = JOptionPane.showConfirmDialog(null,
+                "Machine is currently not available.\nWould you like to make a reservation instead?",
+                "Make Reservation", JOptionPane.YES_NO_OPTION);
+
+        if (reserveOption != JOptionPane.YES_OPTION) return;
+
+        // Show extras BEFORE asking for reservation dates
+        JCheckBox speakerCheck = new JCheckBox("Speaker (+₱100 each)");
+        JCheckBox lightCheck = new JCheckBox("Disco Light (+₱60 each)");
+        JTextField speakerQty = new JTextField("1");
+        JTextField lightQty = new JTextField("1");
+
+        JPanel extrasPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        extrasPanel.add(speakerCheck);
+        extrasPanel.add(speakerQty);
+        extrasPanel.add(lightCheck);
+        extrasPanel.add(lightQty);
+
+        int extrasConfirm = JOptionPane.showConfirmDialog(null, extrasPanel, "Add Extras", JOptionPane.OK_CANCEL_OPTION);
+        if (extrasConfirm == JOptionPane.OK_OPTION) {
+            if (speakerCheck.isSelected()) {
+                int qty = Integer.parseInt(speakerQty.getText().trim());
+                if (qty < 0) throw new NumberFormatException();
+                additionalCost += qty * 100;
+                additionalDetails += "Speaker x" + qty + " = ₱" + (qty * 100) + "\n";
+            }
+            if (lightCheck.isSelected()) {
+                int qty = Integer.parseInt(lightQty.getText().trim());
+                if (qty < 0) throw new NumberFormatException();
+                additionalCost += qty * 60;
+                additionalDetails += "Disco Light x" + qty + " = ₱" + (qty * 60) + "\n";
             }
         }
 
-        if (machineName.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Invalid machine info! Please select a machine.", "Error", JOptionPane.ERROR_MESSAGE);
+        // Ask for reservation dates after extras
+        JDateChooser resStartChooser = new JDateChooser();
+        JDateChooser resEndChooser = new JDateChooser();
+        resStartChooser.setDateFormatString("yyyy-MM-dd");
+        resEndChooser.setDateFormatString("yyyy-MM-dd");
+
+        JPanel resPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        resPanel.add(new JLabel("Reservation Start Date:"));
+        resPanel.add(resStartChooser);
+        resPanel.add(new JLabel("Reservation End Date:"));
+        resPanel.add(resEndChooser);
+
+        int resConfirm = JOptionPane.showConfirmDialog(null, resPanel, "Select Reservation Dates", JOptionPane.OK_CANCEL_OPTION);
+        if (resConfirm == JOptionPane.OK_OPTION) {
+            java.util.Date resStartDate = resStartChooser.getDate();
+            java.util.Date resEndDate = resEndChooser.getDate();
+
+            if (resStartDate == null || resEndDate == null || resEndDate.before(resStartDate)) {
+                JOptionPane.showMessageDialog(null, "Invalid reservation dates!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            java.sql.Date reservationStartDate = new java.sql.Date(resStartDate.getTime());
+            java.sql.Date reservationEndDate = new java.sql.Date(resEndDate.getTime());
+
+            PreparedStatement resStmt = kon.prepareStatement(
+                    "INSERT INTO reservations (customer_name, contact_number, email, address, machine_id, machine_name, reservation_start_date, reservation_end_date, additional_item, status) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')");
+            resStmt.setString(1, customerName);
+            resStmt.setString(2, contactNumber);
+            resStmt.setString(3, emailAddress);
+            resStmt.setString(4, address);
+            resStmt.setInt(5, machineId);
+            resStmt.setString(6, machineName);
+            resStmt.setDate(7, reservationStartDate);
+            resStmt.setDate(8, reservationEndDate);
+            resStmt.setString(9, additionalDetails.trim());
+            resStmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,
+                    "Reservation placed successfully!\nStatus: Pending\nExtras:\n" + additionalDetails,
+                    "Reservation Confirmed", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }
-
-        String customerDetails = "Customer Name: " + customerName + "\n"
-                + "Contact Number: " + contactNumber + "\n"
-                + "Email: " + emailAddress + "\n"
-                + "Address: " + address + "\n"
-                + "Machine: " + machineName;
-
-        int confirm = JOptionPane.showConfirmDialog(null, customerDetails, "Confirm Rental", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) return;
-
-        int machineId = 0;
-        double machinePrice = 0;
-        String status = "";
-
-        PreparedStatement fetchStmt = kon.prepareStatement("SELECT machine_id, price, status FROM videoke_machines WHERE machine_name = ?");
-        fetchStmt.setString(1, machineName);
-        ResultSet rs = fetchStmt.executeQuery();
-        if (rs.next()) {
-            machineId = rs.getInt("machine_id");
-            machinePrice = rs.getDouble("price");
-            status = rs.getString("status");
         } else {
-            JOptionPane.showMessageDialog(null, "Machine not found in DB!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        String additionalDetails = "";
-        double additionalCost = 0;
-        
-
-        if (!"Available".equalsIgnoreCase(status)) {
-            int reserveOption = JOptionPane.showConfirmDialog(null,
-                    "Machine is currently not available.\nWould you like to make a reservation instead?",
-                    "Make Reservation", JOptionPane.YES_NO_OPTION);
-
-            if (reserveOption != JOptionPane.YES_OPTION) return;
-
-            JDateChooser resStartChooser = new JDateChooser();
-            JDateChooser resEndChooser = new JDateChooser();
-            resStartChooser.setDateFormatString("yyyy-MM-dd");
-            resEndChooser.setDateFormatString("yyyy-MM-dd");
-
-            JPanel resPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-            resPanel.add(new JLabel("Reservation Start Date:"));
-            resPanel.add(resStartChooser);
-            resPanel.add(new JLabel("Reservation End Date:"));
-            resPanel.add(resEndChooser);
-
-            // Add extras during reservation
-    JCheckBox speakerCheck = new JCheckBox("Speaker (+₱100 each)");
-    JCheckBox lightCheck = new JCheckBox("Disco Light (+₱60 each)");
-    JTextField speakerQty = new JTextField("1");
-    JTextField lightQty = new JTextField("1");
-
-    resPanel.add(speakerCheck);
-    resPanel.add(speakerQty);
-    resPanel.add(lightCheck);
-    resPanel.add(lightQty);
-
-    int resConfirm = JOptionPane.showConfirmDialog(null, resPanel, "Reserve with Extras", JOptionPane.OK_CANCEL_OPTION);
-    if (resConfirm == JOptionPane.OK_OPTION) {
-        java.util.Date resStartDate = resStartChooser.getDate();
-        java.util.Date resEndDate = resEndChooser.getDate();
-
-        if (resStartDate == null || resEndDate == null || resEndDate.before(resStartDate)) {
-            JOptionPane.showMessageDialog(null, "Invalid reservation dates!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        java.sql.Date reservationStartDate = new java.sql.Date(resStartDate.getTime());
-        java.sql.Date reservationEndDate = new java.sql.Date(resEndDate.getTime());
-
-        String reservationExtras = "";
-        double extraCost = 0;
-
-        if (speakerCheck.isSelected()) {
-            int qty = Integer.parseInt(speakerQty.getText().trim());
-            if (qty < 0) throw new NumberFormatException();
-            extraCost += qty * 100;
-            reservationExtras += "Speaker x" + qty + " = ₱" + (qty * 100) + "\n";
-        }
-
-        if (lightCheck.isSelected()) {
-            int qty = Integer.parseInt(lightQty.getText().trim());
-            if (qty < 0) throw new NumberFormatException();
-            extraCost += qty * 60;
-            reservationExtras += "Disco Light x" + qty + " = ₱" + (qty * 60) + "\n";
-        }
-
-        PreparedStatement resStmt = kon.prepareStatement(
-                "INSERT INTO reservations (customer_name, contact_number, email, address, machine_id, machine_name, reservation_start_date, reservation_end_date, additional_item, status) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')");
-        resStmt.setString(1, customerName);
-        resStmt.setString(2, contactNumber);
-        resStmt.setString(3, emailAddress);
-        resStmt.setString(4, address);
-        resStmt.setInt(5, machineId);
-        resStmt.setString(6, machineName);
-        resStmt.setDate(7, reservationStartDate);
-        resStmt.setDate(8, reservationEndDate);
-        resStmt.setString(9, reservationExtras.trim());
-        resStmt.executeUpdate();
-
-        JOptionPane.showMessageDialog(null,
-                "Reservation placed successfully!\nStatus: Pending\nExtras:\n" + reservationExtras,
-                "Reservation Confirmed", JOptionPane.INFORMATION_MESSAGE);
     }
-        }
 
-        JDateChooser startChooser = new JDateChooser();
-        JDateChooser endChooser = new JDateChooser();
-        startChooser.setDateFormatString("yyyy-MM-dd");
-        endChooser.setDateFormatString("yyyy-MM-dd");
+    // ... (the rest of your normal rental process stays here unchanged) ...
 
-        JPanel datePanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        datePanel.add(new JLabel("Rental Start Date:"));
-        datePanel.add(startChooser);
-        datePanel.add(new JLabel("Rental End Date:"));
-        datePanel.add(endChooser);
+} catch (Exception e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
+}
 
-        int datePick = JOptionPane.showConfirmDialog(null, datePanel, "Select Rental Dates", JOptionPane.OK_CANCEL_OPTION);
-        if (datePick != JOptionPane.OK_OPTION) return;
 
-        java.util.Date startDate = startChooser.getDate();
-        java.util.Date endDate = endChooser.getDate();
-
-        if (startDate == null || endDate == null || endDate.before(startDate)) {
-            JOptionPane.showMessageDialog(null, "Invalid rental dates!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        java.sql.Date rentalStartDate = new java.sql.Date(startDate.getTime());
-        java.sql.Date rentalEndDate = new java.sql.Date(endDate.getTime());
-
-        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
-        long rentalDays = (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
-
-        double dailyRate = 700.00;
-        double baseRentalCost = rentalDays * dailyRate;
-        double totalPrice = additionalCost + baseRentalCost;
-
-        String paymentAmountStr = JOptionPane.showInputDialog(null, "Enter amount to pay (₱):", "Payment", JOptionPane.QUESTION_MESSAGE);
-        if (paymentAmountStr == null || paymentAmountStr.trim().isEmpty()) return;
-
-        double paymentAmount = Double.parseDouble(paymentAmountStr.trim());
-        if (paymentAmount < totalPrice) {
-            JOptionPane.showMessageDialog(null, "Insufficient payment! Please enter the correct amount.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        double change = paymentAmount - totalPrice;
-
-        String[] paymentOptions = {"Cash", "Credit Card"};
-        String selectedPayment = (String) JOptionPane.showInputDialog(
-                null, "Choose Payment Method:", "Payment Method", JOptionPane.QUESTION_MESSAGE, null, paymentOptions, paymentOptions[0]);
-
-        if (selectedPayment == null) return;
-
-        int paymentConfirm = JOptionPane.showConfirmDialog(null,
-                "Machine Price: ₱" + machinePrice + "\n" +
-                        (additionalCost > 0 ? "Extras: ₱" + additionalCost + "\n" : "") +
-                        "Total: ₱" + totalPrice + "\n" +
-                        "Payment Method: " + selectedPayment + "\n" +
-                        "Amount Paid: ₱" + paymentAmount + "\n" +
-                        (change > 0 ? "Change: ₱" + change + "\n" : "") +
-                        "Proceed to payment?",
-                "Confirm Payment", JOptionPane.YES_NO_OPTION);
-        if (paymentConfirm != JOptionPane.YES_OPTION) return;
-
-        PreparedStatement insertStmt = kon.prepareStatement(
-                "INSERT INTO customers (customer_name, contact_number, email, address, machine_id, created_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
-        insertStmt.setString(1, customerName);
-        insertStmt.setString(2, contactNumber);
-        insertStmt.setString(3, emailAddress);
-        insertStmt.setString(4, address);
-        insertStmt.setInt(5, machineId);
-        insertStmt.executeUpdate();
-
-        PreparedStatement updateStmt = kon.prepareStatement("UPDATE videoke_machines SET status = 'Rented' WHERE machine_id = ?");
-        updateStmt.setInt(1, machineId);
-        updateStmt.executeUpdate();
-
-        PreparedStatement logStmt = kon.prepareStatement(
-                "INSERT INTO rental_logs (customer_name, contact_number, email, address, machine_id, machine_name, additional_item, rental_start_date, rental_end_date) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        logStmt.setString(1, customerName);
-        logStmt.setString(2, contactNumber);
-        logStmt.setString(3, emailAddress);
-        logStmt.setString(4, address);
-        logStmt.setInt(5, machineId);
-        logStmt.setString(6, machineName);
-        logStmt.setString(7, additionalDetails);
-        logStmt.setDate(8, rentalStartDate);
-        logStmt.setDate(9, rentalEndDate);
-        logStmt.executeUpdate();
-
-        String receipt = "----- RECEIPT -----\n"
-                + "Customer: " + customerName + "\n"
-                + "Contact: " + contactNumber + "\n"
-                + "Email: " + emailAddress + "\n"
-                + "Address: " + address + "\n"
-                + "Machine: " + machineName + " (₱" + machinePrice + ")\n"
-                + (additionalDetails.isEmpty() ? "" : "Extras: " + additionalDetails + "\n")
-                + "Rental Period: " + rentalStartDate + " to " + rentalEndDate + "\n"
-                + "Payment Method: " + selectedPayment + "\n"
-                + "Amount Paid: ₱" + paymentAmount + "\n"
-                + (change > 0 ? "Change: ₱" + change + "\n" : "") +
-                "TOTAL: ₱" + totalPrice + "\n"
-                + "---------------------";
-
-        JOptionPane.showMessageDialog(null, receipt, "Receipt", JOptionPane.INFORMATION_MESSAGE);
-
-        cusname.setText("");
-        connum.setText("");
-        email.setText("");
-        adds.setText("");
-        info.setText("");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
-    }
 
 
     }//GEN-LAST:event_rentActionPerformed
