@@ -26,6 +26,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author User
@@ -62,40 +64,43 @@ public class Staff extends javax.swing.JFrame {
         dashboard = new javax.swing.JButton();
         customermngmnt = new javax.swing.JButton();
         usagemonitor = new javax.swing.JButton();
-        equipmngmnt = new javax.swing.JButton();
-        reports = new javax.swing.JButton();
+        mngequipment = new javax.swing.JButton();
+        mngreservation = new javax.swing.JButton();
         logoutstaff = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
-        machine1bttn = new javax.swing.JButton();
-        machine2bttn = new javax.swing.JButton();
-        machine3bttn = new javax.swing.JButton();
-        machine4bttn = new javax.swing.JButton();
-        machine5bttn = new javax.swing.JButton();
-        machine6bttn = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        machine1bttn1 = new javax.swing.JButton();
+        machine2bttn1 = new javax.swing.JButton();
+        machine3bttn1 = new javax.swing.JButton();
+        machine4bttn1 = new javax.swing.JButton();
+        machine5bttn1 = new javax.swing.JButton();
+        machine6bttn1 = new javax.swing.JButton();
         info = new java.awt.TextArea();
         rent = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         cusname = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         connum = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         adds = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        bookingmngmnt = new javax.swing.JButton();
+        booking = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,7 +122,7 @@ public class Staff extends javax.swing.JFrame {
                 dashboardActionPerformed(evt);
             }
         });
-        jPanel1.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 210, 40));
+        jPanel1.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 210, 40));
 
         customermngmnt.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         customermngmnt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/customermngmnt.png"))); // NOI18N
@@ -129,7 +134,7 @@ public class Staff extends javax.swing.JFrame {
         });
         jPanel1.add(customermngmnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 210, 40));
 
-        usagemonitor.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        usagemonitor.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
         usagemonitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/usagemonitor.png"))); // NOI18N
         usagemonitor.setText("Usage Monitoring");
         usagemonitor.addActionListener(new java.awt.event.ActionListener() {
@@ -139,27 +144,27 @@ public class Staff extends javax.swing.JFrame {
         });
         jPanel1.add(usagemonitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 210, 40));
 
-        equipmngmnt.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        equipmngmnt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/equipmngmnt.png"))); // NOI18N
-        equipmngmnt.setText("Equipment Management");
-        equipmngmnt.addActionListener(new java.awt.event.ActionListener() {
+        mngequipment.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
+        mngequipment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/equipmngmnt.png"))); // NOI18N
+        mngequipment.setText("Manage Equipment");
+        mngequipment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equipmngmntActionPerformed(evt);
+                mngequipmentActionPerformed(evt);
             }
         });
-        jPanel1.add(equipmngmnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 210, 40));
+        jPanel1.add(mngequipment, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 210, 40));
 
-        reports.setFont(new java.awt.Font("Monospaced", 1, 15)); // NOI18N
-        reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/reportssss.png"))); // NOI18N
-        reports.setText("Reports");
-        reports.addActionListener(new java.awt.event.ActionListener() {
+        mngreservation.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        mngreservation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/reservationIcon.png"))); // NOI18N
+        mngreservation.setText("Manage Reservation");
+        mngreservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportsActionPerformed(evt);
+                mngreservationActionPerformed(evt);
             }
         });
-        jPanel1.add(reports, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 210, 40));
+        jPanel1.add(mngreservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 210, 40));
 
-        logoutstaff.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        logoutstaff.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         logoutstaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logouticon.png"))); // NOI18N
         logoutstaff.setText("Log out");
         logoutstaff.addActionListener(new java.awt.event.ActionListener() {
@@ -176,57 +181,77 @@ public class Staff extends javax.swing.JFrame {
         jPanel9.setRequestFocusEnabled(false);
         jPanel9.setVerifyInputWhenFocusTarget(false);
 
-        machine1bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine1bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine1.png"))); // NOI18N
-        machine1bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine1bttn.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 495, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Dashboard", jPanel9);
+
+        jPanel10.setBackground(new java.awt.Color(204, 255, 255));
+
+        jPanel15.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel15.setPreferredSize(new java.awt.Dimension(740, 490));
+        jPanel15.setRequestFocusEnabled(false);
+        jPanel15.setVerifyInputWhenFocusTarget(false);
+
+        machine1bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine1bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine1.png"))); // NOI18N
+        machine1bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine1bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine1bttnActionPerformed(evt);
+                machine1bttn1ActionPerformed(evt);
             }
         });
 
-        machine2bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine2bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine2.png"))); // NOI18N
-        machine2bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine2bttn.addActionListener(new java.awt.event.ActionListener() {
+        machine2bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine2bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine2.png"))); // NOI18N
+        machine2bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine2bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine2bttnActionPerformed(evt);
+                machine2bttn1ActionPerformed(evt);
             }
         });
 
-        machine3bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine3bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine3.png"))); // NOI18N
-        machine3bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine3bttn.addActionListener(new java.awt.event.ActionListener() {
+        machine3bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine3bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine3.png"))); // NOI18N
+        machine3bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine3bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine3bttnActionPerformed(evt);
+                machine3bttn1ActionPerformed(evt);
             }
         });
 
-        machine4bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine4bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine4.png"))); // NOI18N
-        machine4bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine4bttn.addActionListener(new java.awt.event.ActionListener() {
+        machine4bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine4bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine4.png"))); // NOI18N
+        machine4bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine4bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine4bttnActionPerformed(evt);
+                machine4bttn1ActionPerformed(evt);
             }
         });
 
-        machine5bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine5bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machinee5.png"))); // NOI18N
-        machine5bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine5bttn.addActionListener(new java.awt.event.ActionListener() {
+        machine5bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine5bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machinee5.png"))); // NOI18N
+        machine5bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine5bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine5bttnActionPerformed(evt);
+                machine5bttn1ActionPerformed(evt);
             }
         });
 
-        machine6bttn.setBackground(new java.awt.Color(102, 204, 255));
-        machine6bttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine6.png"))); // NOI18N
-        machine6bttn.setBorder(new javax.swing.border.MatteBorder(null));
-        machine6bttn.addActionListener(new java.awt.event.ActionListener() {
+        machine6bttn1.setBackground(new java.awt.Color(102, 204, 255));
+        machine6bttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/machine6.png"))); // NOI18N
+        machine6bttn1.setBorder(new javax.swing.border.MatteBorder(null));
+        machine6bttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                machine6bttnActionPerformed(evt);
+                machine6bttn1ActionPerformed(evt);
             }
         });
 
@@ -243,29 +268,29 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel3.setText("Machine 1");
+        jLabel14.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel14.setText("Machine 1");
 
-        jLabel4.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel4.setText("Machine 2");
+        jLabel15.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel15.setText("Machine 2");
 
-        jLabel5.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel5.setText("Machine 6");
+        jLabel16.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel16.setText("Machine 6");
 
-        jLabel6.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel6.setText("Machine 3");
+        jLabel17.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel17.setText("Machine 3");
 
-        jLabel7.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel7.setText("Machine 4");
+        jLabel18.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel18.setText("Machine 4");
 
-        jLabel8.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel8.setText("Machine 5");
+        jLabel19.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jLabel19.setText("Machine 5");
 
-        jLabel9.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jLabel9.setText("Customer Name:");
+        jLabel20.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel20.setText("Customer Name:");
 
-        jLabel10.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jLabel10.setText("Contact Number:");
+        jLabel21.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel21.setText("Contact Number:");
 
         cusname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,8 +304,8 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jLabel11.setText("Email:");
+        jLabel22.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel22.setText("Email:");
 
         connum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,8 +313,8 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jLabel12.setText("Address:");
+        jLabel23.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jLabel23.setText("Address:");
 
         adds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,166 +322,192 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("CLEAR");
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel24.setText("CLEAR");
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
+                jLabel24MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel8)
+                .addComponent(jLabel19)
                 .addGap(97, 97, 97)
-                .addComponent(jLabel5)
+                .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel9Layout.createSequentialGroup()
+            .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(machine5bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(machine5bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(machine6bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(machine6bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113)
                         .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(machine1bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(machine3bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel24))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(machine1bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(machine3bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))))
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel17))))
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(machine2bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(machine4bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(machine2bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(machine4bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7))))
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel18))))
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 18, Short.MAX_VALUE)))
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 19, Short.MAX_VALUE)))
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cusname)
                                             .addComponent(adds, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                                             .addComponent(email)))
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(connum, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)))))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(0, 306, Short.MAX_VALUE)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(adds, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel24))
                         .addGap(60, 60, 60))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(machine1bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(machine1bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel14)
                                 .addGap(3, 3, 3)
-                                .addComponent(machine3bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(machine3bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel17)
                                 .addGap(3, 3, 3)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(machine5bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(machine6bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(machine5bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(machine6bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(4, 4, 4)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel5)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addComponent(machine2bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel16)))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
+                                        .addComponent(machine2bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(6, 6, 6)
-                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel15)
                                         .addGap(3, 3, 3)
-                                        .addComponent(machine4bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addComponent(machine4bttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel15Layout.createSequentialGroup()
                                         .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(cusname, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(connum, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(4, 4, 4)
-                                .addComponent(jLabel7)))
+                                .addComponent(jLabel18)))
                         .addContainerGap())))
         );
-
-        jTabbedPane1.addTab("Booking Management", jPanel9);
-
-        jPanel10.setBackground(new java.awt.Color(204, 255, 255));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 740, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Dashboard", jPanel10);
+        jTabbedPane1.addTab("Manage Booking", jPanel10);
 
         jPanel11.setBackground(new java.awt.Color(204, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customer Management", jPanel11);
@@ -489,7 +540,7 @@ public class Staff extends javax.swing.JFrame {
             .addGap(0, 495, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Equipment  Management", jPanel13);
+        jTabbedPane1.addTab("Manage Equipment", jPanel13);
 
         jPanel14.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -504,19 +555,19 @@ public class Staff extends javax.swing.JFrame {
             .addGap(0, 495, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Reports", jPanel14);
+        jTabbedPane1.addTab("Manage Reservation", jPanel14);
 
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 740, 530));
 
-        bookingmngmnt.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        bookingmngmnt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bookingggicon.png"))); // NOI18N
-        bookingmngmnt.setText("Booking Management");
-        bookingmngmnt.addActionListener(new java.awt.event.ActionListener() {
+        booking.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
+        booking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bookingggicon.png"))); // NOI18N
+        booking.setText("Manage Booking ");
+        booking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookingmngmntActionPerformed(evt);
+                bookingActionPerformed(evt);
             }
         });
-        jPanel1.add(bookingmngmnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 210, 40));
+        jPanel1.add(booking, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 210, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/guiadmindashh.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -551,20 +602,20 @@ public class Staff extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_customermngmntActionPerformed
 
-    private void equipmngmntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmngmntActionPerformed
+    private void mngequipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngequipmentActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(4);
-    }//GEN-LAST:event_equipmngmntActionPerformed
+    }//GEN-LAST:event_mngequipmentActionPerformed
 
     private void usagemonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usagemonitorActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_usagemonitorActionPerformed
 
-    private void reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsActionPerformed
+    private void mngreservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mngreservationActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(5);
-    }//GEN-LAST:event_reportsActionPerformed
+    }//GEN-LAST:event_mngreservationActionPerformed
 
     private void logoutstaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutstaffActionPerformed
         // TODO add your handling code here:
@@ -583,14 +634,14 @@ public class Staff extends javax.swing.JFrame {
    }
     }//GEN-LAST:event_logoutstaffActionPerformed
 
-    private void bookingmngmntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingmngmntActionPerformed
+    private void bookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_bookingmngmntActionPerformed
+    }//GEN-LAST:event_bookingActionPerformed
 
-    private void machine1bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine1bttnActionPerformed
-        // TODO add your handling code here:
-       // Connect to the database
+    private void machine1bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine1bttn1ActionPerformed
+        // TODO add your handling code here
+        // Connect to the database
     Connection connection = DBKonek.getConnection();
 
     if (connection == null) {
@@ -644,11 +695,13 @@ public class Staff extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       }
-    }//GEN-LAST:event_machine1bttnActionPerformed
+       
+    }
+    }//GEN-LAST:event_machine1bttn1ActionPerformed
 
-    private void machine2bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine2bttnActionPerformed
+    private void machine2bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine2bttn1ActionPerformed
         // TODO add your handling code here:
+// TODO add your handling code here:
     Connection connection = DBKonek.getConnection();
 
     if (connection == null) {
@@ -703,10 +756,11 @@ public class Staff extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    }//GEN-LAST:event_machine2bttnActionPerformed
+    }//GEN-LAST:event_machine2bttn1ActionPerformed
 
-    private void machine3bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine3bttnActionPerformed
+    private void machine3bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine3bttn1ActionPerformed
         // TODO add your handling code here:
+        
        Connection connection = DBKonek.getConnection();
 
     if (connection == null) {
@@ -760,9 +814,9 @@ public class Staff extends javax.swing.JFrame {
             e.printStackTrace();
         }
    }
-    }//GEN-LAST:event_machine3bttnActionPerformed
+    }//GEN-LAST:event_machine3bttn1ActionPerformed
 
-    private void machine4bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine4bttnActionPerformed
+    private void machine4bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine4bttn1ActionPerformed
         // TODO add your handling code here:
         Connection connection = DBKonek.getConnection();
 
@@ -819,11 +873,11 @@ public class Staff extends javax.swing.JFrame {
             e.printStackTrace();
         }
      }
-    }//GEN-LAST:event_machine4bttnActionPerformed
+    }//GEN-LAST:event_machine4bttn1ActionPerformed
 
-    private void machine5bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine5bttnActionPerformed
-        // TODO add your handling code here:
-        Connection connection = DBKonek.getConnection();
+    private void machine5bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine5bttn1ActionPerformed
+        // TODO add your handling code here
+         Connection connection = DBKonek.getConnection();
 
     if (connection == null) {
         JOptionPane.showMessageDialog(null, "Database connection failed.");
@@ -854,7 +908,7 @@ public class Staff extends javax.swing.JFrame {
                                  + "Remarks: " + remarks + "\n"
                                  + "Inclusions:\n"
                                  + "     -  1 Videoke Player Unit\n"
-                                 + "     -  2 Wired Microphones (as seen in the image)\n"
+                                 + "     -  2 Wired Microphones\n"
                                  + "     -  TV Display on a Stand\n"
                                  + "     -  Speaker on a Tripod Stand\n"
                                  + "     -  Basic Song Library\n"
@@ -877,12 +931,13 @@ public class Staff extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    }//GEN-LAST:event_machine5bttnActionPerformed
+}  
+    }//GEN-LAST:event_machine5bttn1ActionPerformed
 
-    private void machine6bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine6bttnActionPerformed
+    private void machine6bttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machine6bttn1ActionPerformed
         // TODO add your handling code here:
-        Connection connection = DBKonek.getConnection();
+                // TODO add your handling code here
+         Connection connection = DBKonek.getConnection();
 
     if (connection == null) {
         JOptionPane.showMessageDialog(null, "Database connection failed.");
@@ -905,7 +960,7 @@ public class Staff extends javax.swing.JFrame {
             String remarks = rs.getString("remarks");
             double price = rs.getDouble("price");
 
-            // Updated info based on the image - Integrated Karaoke System
+            // Updated info based on the image - Standard Package
             String machineInfo = "                                  Basic Package\n"
                                  + "--------------------------------------------------------------------------\n"
                                  + "Machine Name: " + machineName + "\n"
@@ -936,160 +991,368 @@ public class Staff extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    }//GEN-LAST:event_machine6bttnActionPerformed
+}
+        
+    }//GEN-LAST:event_machine6bttn1ActionPerformed
 
     private void rentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentActionPerformed
+        // TODO add your handling code here:
+        try {
+        UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+
+        // Get customer information
+        String customerName = cusname.getText().trim();
+        String contactNumber = connum.getText().trim();
+        String emailAddress = email.getText().trim();
+        String address = adds.getText().trim();
+        String machineInfoText = info.getText().trim();
+
+        // Validate input fields
+        if (customerName.isEmpty() || contactNumber.isEmpty() || emailAddress.isEmpty()
+                || address.isEmpty() || machineInfoText.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Extract machine name from info text
+        String machineName = "";
+        for (String line : machineInfoText.split("\n")) {
+            if (line.startsWith("Machine Name: ")) {
+                machineName = line.substring("Machine Name: ".length()).trim();
+                break;
+            }
+        }
+
+        if (machineName.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Invalid machine info! Please select a machine.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Format customer details for confirmation
+        String customerDetails = "Customer Name: " + customerName + "\n"
+                + "Contact Number: " + contactNumber + "\n"
+                + "Email: " + emailAddress + "\n"
+                + "Address: " + address + "\n"
+                + "Machine: " + machineName;
+
+        int confirm = JOptionPane.showConfirmDialog(null, customerDetails, "Confirm Rental", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        // Fetch machine details
+        int machineId = 0;
+        double machinePrice = 0;
+        String status = "";
+
+        PreparedStatement fetchStmt = kon.prepareStatement(
+                "SELECT machine_id, price, status FROM videoke_machines WHERE machine_name = ?");
+        fetchStmt.setString(1, machineName);
+        ResultSet rs = fetchStmt.executeQuery();
         
-    try {
-    UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
-
-    String customerName = cusname.getText().trim();
-    String contactNumber = connum.getText().trim();
-    String emailAddress = email.getText().trim();
-    String address = adds.getText().trim();
-    String machineInfoText = info.getText().trim();
-
-    if (customerName.isEmpty() || contactNumber.isEmpty() || emailAddress.isEmpty()
-            || address.isEmpty() || machineInfoText.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    String machineName = "";
-    for (String line : machineInfoText.split("\n")) {
-        if (line.startsWith("Machine Name: ")) {
-            machineName = line.substring("Machine Name: ".length()).trim();
-            break;
-        }
-    }
-
-    if (machineName.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Invalid machine info! Please select a machine.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    String customerDetails = "Customer Name: " + customerName + "\n"
-            + "Contact Number: " + contactNumber + "\n"
-            + "Email: " + emailAddress + "\n"
-            + "Address: " + address + "\n"
-            + "Machine: " + machineName;
-
-    int confirm = JOptionPane.showConfirmDialog(null, customerDetails, "Confirm Rental", JOptionPane.YES_NO_OPTION);
-    if (confirm != JOptionPane.YES_OPTION) return;
-
-    int machineId = 0;
-    double machinePrice = 0;
-    String status = "";
-
-    PreparedStatement fetchStmt = kon.prepareStatement("SELECT machine_id, price, status FROM videoke_machines WHERE machine_name = ?");
-    fetchStmt.setString(1, machineName);
-    ResultSet rs = fetchStmt.executeQuery();
-    if (rs.next()) {
-        machineId = rs.getInt("machine_id");
-        machinePrice = rs.getDouble("price");
-        status = rs.getString("status");
-    } else {
-        JOptionPane.showMessageDialog(null, "Machine not found in DB!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    String additionalDetails = "";
-    double additionalCost = 0;
-
-    if (!"Available".equalsIgnoreCase(status)) {
-        int reserveOption = JOptionPane.showConfirmDialog(null,
-                "Machine is currently not available.\nWould you like to make a reservation instead?",
-                "Make Reservation", JOptionPane.YES_NO_OPTION);
-
-        if (reserveOption != JOptionPane.YES_OPTION) return;
-
-        // Show extras BEFORE asking for reservation dates
-        JCheckBox speakerCheck = new JCheckBox("Speaker (+₱100 each)");
-        JCheckBox lightCheck = new JCheckBox("Disco Light (+₱60 each)");
-        JTextField speakerQty = new JTextField("1");
-        JTextField lightQty = new JTextField("1");
-
-        JPanel extrasPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        extrasPanel.add(speakerCheck);
-        extrasPanel.add(speakerQty);
-        extrasPanel.add(lightCheck);
-        extrasPanel.add(lightQty);
-
-        int extrasConfirm = JOptionPane.showConfirmDialog(null, extrasPanel, "Add Extras", JOptionPane.OK_CANCEL_OPTION);
-        if (extrasConfirm == JOptionPane.OK_OPTION) {
-            if (speakerCheck.isSelected()) {
-                int qty = Integer.parseInt(speakerQty.getText().trim());
-                if (qty < 0) throw new NumberFormatException();
-                additionalCost += qty * 100;
-                additionalDetails += "Speaker x" + qty + " = ₱" + (qty * 100) + "\n";
-            }
-            if (lightCheck.isSelected()) {
-                int qty = Integer.parseInt(lightQty.getText().trim());
-                if (qty < 0) throw new NumberFormatException();
-                additionalCost += qty * 60;
-                additionalDetails += "Disco Light x" + qty + " = ₱" + (qty * 60) + "\n";
-            }
+        if (rs.next()) {
+            machineId = rs.getInt("machine_id");
+            machinePrice = rs.getDouble("price");
+            status = rs.getString("status");
+        } else {
+            JOptionPane.showMessageDialog(null, "Machine not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        // Ask for reservation dates after extras
-        JDateChooser resStartChooser = new JDateChooser();
-        JDateChooser resEndChooser = new JDateChooser();
-        resStartChooser.setDateFormatString("yyyy-MM-dd");
-        resEndChooser.setDateFormatString("yyyy-MM-dd");
+        String additionalDetails = "";
+        double additionalCost = 0;
 
-        JPanel resPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        resPanel.add(new JLabel("Reservation Start Date:"));
-        resPanel.add(resStartChooser);
-        resPanel.add(new JLabel("Reservation End Date:"));
-        resPanel.add(resEndChooser);
+        if (!"Available".equalsIgnoreCase(status)) {
+            // Machine is not available - offer reservation
+            int reserveOption = JOptionPane.showConfirmDialog(null,
+                    "Machine is currently not available.\nWould you like to make a reservation instead?",
+                    "Make Reservation", JOptionPane.YES_NO_OPTION);
 
-        int resConfirm = JOptionPane.showConfirmDialog(null, resPanel, "Select Reservation Dates", JOptionPane.OK_CANCEL_OPTION);
-        if (resConfirm == JOptionPane.OK_OPTION) {
-            java.util.Date resStartDate = resStartChooser.getDate();
-            java.util.Date resEndDate = resEndChooser.getDate();
+            if (reserveOption != JOptionPane.YES_OPTION) return;
 
-            if (resStartDate == null || resEndDate == null || resEndDate.before(resStartDate)) {
-                JOptionPane.showMessageDialog(null, "Invalid reservation dates!", "Error", JOptionPane.ERROR_MESSAGE);
+            // Show extras selection
+            JCheckBox speakerCheck = new JCheckBox("Speaker (+₱100 each)");
+            JCheckBox lightCheck = new JCheckBox("Disco Light (+₱60 each)");
+            JTextField speakerQty = new JTextField("1", 5);
+            JTextField lightQty = new JTextField("1", 5);
+
+            JPanel extrasPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+            extrasPanel.add(speakerCheck);
+            extrasPanel.add(speakerQty);
+            extrasPanel.add(lightCheck);
+            extrasPanel.add(lightQty);
+
+            int extrasConfirm = JOptionPane.showConfirmDialog(null, extrasPanel, "Add Extras", JOptionPane.OK_CANCEL_OPTION);
+            if (extrasConfirm == JOptionPane.OK_OPTION) {
+                try {
+                    if (speakerCheck.isSelected()) {
+                        int qty = Integer.parseInt(speakerQty.getText().trim());
+                        if (qty < 0) throw new NumberFormatException();
+                        additionalCost += qty * 100;
+                        additionalDetails += "Speaker x" + qty + " = ₱" + (qty * 100) + "\n";
+                    }
+                    if (lightCheck.isSelected()) {
+                        int qty = Integer.parseInt(lightQty.getText().trim());
+                        if (qty < 0) throw new NumberFormatException();
+                        additionalCost += qty * 60;
+                        additionalDetails += "Disco Light x" + qty + " = ₱" + (qty * 60) + "\n";
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid quantities!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            // Ask for reservation dates
+            JDateChooser resStartChooser = new JDateChooser();
+            JDateChooser resEndChooser = new JDateChooser();
+            resStartChooser.setDateFormatString("yyyy-MM-dd");
+            resEndChooser.setDateFormatString("yyyy-MM-dd");
+
+            JPanel resPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+            resPanel.add(new JLabel("Reservation Start Date:"));
+            resPanel.add(resStartChooser);
+            resPanel.add(new JLabel("Reservation End Date:"));
+            resPanel.add(resEndChooser);
+
+            int resConfirm = JOptionPane.showConfirmDialog(null, resPanel, "Select Reservation Dates", JOptionPane.OK_CANCEL_OPTION);
+            if (resConfirm == JOptionPane.OK_OPTION) {
+                java.util.Date resStartDate = resStartChooser.getDate();
+                java.util.Date resEndDate = resEndChooser.getDate();
+
+                if (resStartDate == null || resEndDate == null || resEndDate.before(resStartDate)) {
+                    JOptionPane.showMessageDialog(null, "Invalid reservation dates!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                java.sql.Date reservationStartDate = new java.sql.Date(resStartDate.getTime());
+                java.sql.Date reservationEndDate = new java.sql.Date(resEndDate.getTime());
+
+                // Insert into reservations with correct column names
+                PreparedStatement resStmt = kon.prepareStatement(
+                        "INSERT INTO reservations (customer_name, contact_number, email, address, " +
+                        "machine_id, machine_name, reservation_start_date, reservation_end_date, " +
+                        "additional_item, status) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')");
+                resStmt.setString(1, customerName);
+                resStmt.setString(2, contactNumber);
+                resStmt.setString(3, emailAddress);
+                resStmt.setString(4, address);
+                resStmt.setInt(5, machineId);
+                resStmt.setString(6, machineName);
+                resStmt.setDate(7, reservationStartDate);
+                resStmt.setDate(8, reservationEndDate);
+                resStmt.setString(9, additionalDetails);
+                resStmt.executeUpdate();
+
+                JOptionPane.showMessageDialog(null,
+                        "Reservation placed successfully!\nStatus: Pending\nExtras:\n" + additionalDetails,
+                        "Reservation Confirmed", JOptionPane.INFORMATION_MESSAGE);
+                clearFields();
+            }
+        } else {
+            // MACHINE IS AVAILABLE - CREATE DIRECT RENTAL
+            
+            // Ask for extras
+            JCheckBox speakerCheck = new JCheckBox("Speaker (+₱100 each)");
+            JCheckBox lightCheck = new JCheckBox("Disco Light (+₱60 each)");
+            JTextField speakerQty = new JTextField("1", 5);
+            JTextField lightQty = new JTextField("1", 5);
+
+            JPanel extrasPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+            extrasPanel.add(speakerCheck);
+            extrasPanel.add(speakerQty);
+            extrasPanel.add(lightCheck);
+            extrasPanel.add(lightQty);
+
+            int extrasConfirm = JOptionPane.showConfirmDialog(null, extrasPanel, "Add Extras", JOptionPane.OK_CANCEL_OPTION);
+            if (extrasConfirm != JOptionPane.OK_OPTION) return;
+            
+            try {
+                if (speakerCheck.isSelected()) {
+                    int qty = Integer.parseInt(speakerQty.getText().trim());
+                    if (qty < 0) throw new NumberFormatException();
+                    additionalCost += qty * 100;
+                    additionalDetails += "Speaker x" + qty + " = ₱" + (qty * 100) + "\n";
+                }
+                if (lightCheck.isSelected()) {
+                    int qty = Integer.parseInt(lightQty.getText().trim());
+                    if (qty < 0) throw new NumberFormatException();
+                    additionalCost += qty * 60;
+                    additionalDetails += "Disco Light x" + qty + " = ₱" + (qty * 60) + "\n";
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please enter valid quantities!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Ask for rental dates
+            JDateChooser rentalStartChooser = new JDateChooser();
+            JDateChooser rentalEndChooser = new JDateChooser();
+            rentalStartChooser.setDateFormatString("yyyy-MM-dd");
+            rentalEndChooser.setDateFormatString("yyyy-MM-dd");
+            rentalStartChooser.setDate(new java.util.Date()); // Default to today
+
+            JPanel rentalPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+            rentalPanel.add(new JLabel("Rental Start Date:"));
+            rentalPanel.add(rentalStartChooser);
+            rentalPanel.add(new JLabel("Return Date:"));
+            rentalPanel.add(rentalEndChooser);
+
+            int rentalConfirm = JOptionPane.showConfirmDialog(null, rentalPanel, "Select Rental Dates", JOptionPane.OK_CANCEL_OPTION);
+            if (rentalConfirm != JOptionPane.OK_OPTION) return;
+            
+            java.util.Date rentalStartDate = rentalStartChooser.getDate();
+            java.util.Date rentalEndDate = rentalEndChooser.getDate();
+
+            if (rentalStartDate == null || rentalEndDate == null || rentalEndDate.before(rentalStartDate)) {
+                JOptionPane.showMessageDialog(null, "Invalid rental dates!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            java.sql.Date reservationStartDate = new java.sql.Date(resStartDate.getTime());
-            java.sql.Date reservationEndDate = new java.sql.Date(resEndDate.getTime());
+            // Calculate total days and cost
+            long diffInMillies = rentalEndDate.getTime() - rentalStartDate.getTime();
+            int days = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
+            double totalCost = (machinePrice * days) + additionalCost;
+            
+            // Show rental summary
+            String rentalSummary = "Machine: " + machineName + "\n" +
+                                "Rental Period: " + days + " days\n" +
+                                "Machine Cost: ₱" + machinePrice + " x " + days + " days = ₱" + (machinePrice * days) + "\n";
+            
+            if (!additionalDetails.isEmpty()) {
+                rentalSummary += "Additional Items:\n" + additionalDetails;
+            }
+            
+            rentalSummary += "Total Cost: ₱" + totalCost;
+            
+            int finalConfirm = JOptionPane.showConfirmDialog(null, rentalSummary, 
+                    "Confirm Rental Details", JOptionPane.YES_NO_OPTION);
+            if (finalConfirm != JOptionPane.YES_OPTION) return;
 
-            PreparedStatement resStmt = kon.prepareStatement(
-                    "INSERT INTO reservations (customer_name, contact_number, email, address, machine_id, machine_name, reservation_start_date, reservation_end_date, additional_item, status) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')");
-            resStmt.setString(1, customerName);
-            resStmt.setString(2, contactNumber);
-            resStmt.setString(3, emailAddress);
-            resStmt.setString(4, address);
-            resStmt.setInt(5, machineId);
-            resStmt.setString(6, machineName);
-            resStmt.setDate(7, reservationStartDate);
-            resStmt.setDate(8, reservationEndDate);
-            resStmt.setString(9, additionalDetails.trim());
-            resStmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null,
-                    "Reservation placed successfully!\nStatus: Pending\nExtras:\n" + additionalDetails,
-                    "Reservation Confirmed", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        } else {
-            return;
+            // ASK FOR PAYMENT AMOUNT HERE
+            JPanel paymentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+            paymentPanel.add(new JLabel("Total Amount:"));
+            JTextField totalField = new JTextField(String.valueOf(totalCost));
+            totalField.setEditable(false);
+            paymentPanel.add(totalField);
+            
+            paymentPanel.add(new JLabel("Amount Paid:"));
+            JTextField paidField = new JTextField();
+            paymentPanel.add(paidField);
+            
+            paymentPanel.add(new JLabel("Change:"));
+            JTextField changeField = new JTextField();
+            changeField.setEditable(false);
+            paymentPanel.add(changeField);
+            
+            // Add document listener to calculate change
+            paidField.getDocument().addDocumentListener(new DocumentListener() {
+                public void insertUpdate(DocumentEvent e) { updateChange(); }
+                public void removeUpdate(DocumentEvent e) { updateChange(); }
+                public void changedUpdate(DocumentEvent e) { updateChange(); }
+                
+                private void updateChange() {
+                    try {
+                        double paid = Double.parseDouble(paidField.getText().trim());
+                        double change = paid - totalCost;
+                        changeField.setText(String.format("₱%.2f", change));
+                    } catch (NumberFormatException ex) {
+                        changeField.setText("Invalid amount");
+                    }
+                }
+            });
+            
+            int paymentConfirm = JOptionPane.showConfirmDialog(null, paymentPanel, "Payment", JOptionPane.OK_CANCEL_OPTION);
+            if (paymentConfirm != JOptionPane.OK_OPTION) return;
+            
+            // Validate payment
+            double amountPaid;
+            try {
+                amountPaid = Double.parseDouble(paidField.getText().trim());
+                if (amountPaid < totalCost) {
+                    JOptionPane.showMessageDialog(null, "Payment amount must be at least the total cost!", "Invalid Payment", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please enter a valid payment amount!", "Invalid Payment", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Convert to SQL dates
+            java.sql.Date sqlStartDate = new java.sql.Date(rentalStartDate.getTime());
+            java.sql.Date sqlEndDate = new java.sql.Date(rentalEndDate.getTime());
+            
+            // Save customer information directly in the customers table
+            PreparedStatement custStmt = kon.prepareStatement(
+                    "INSERT INTO customers (customer_name, contact_number, email, address, machine_id) " +
+                    "VALUES (?, ?, ?, ?, ?)");
+            custStmt.setString(1, customerName);
+            custStmt.setString(2, contactNumber);
+            custStmt.setString(3, emailAddress);
+            custStmt.setString(4, address);
+            custStmt.setInt(5, machineId);
+            custStmt.executeUpdate();
+            
+            // Update machine status
+            PreparedStatement updateStmt = kon.prepareStatement(
+                    "UPDATE videoke_machines SET status = 'Rented' WHERE machine_id = ?");
+            updateStmt.setInt(1, machineId);
+            updateStmt.executeUpdate();
+            
+            // Generate receipt
+            double change = amountPaid - totalCost;
+            String receipt = "\n====== VIDEOKE RENTAL RECEIPT ======\n" +
+                           "Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) + "\n" +
+                           "Customer: " + customerName + "\n" +
+                           "Contact: " + contactNumber + "\n\n" +
+                           "Machine: " + machineName + "\n" +
+                           "Rental Period: " + new SimpleDateFormat("yyyy-MM-dd").format(rentalStartDate) +
+                           " to " + new SimpleDateFormat("yyyy-MM-dd").format(rentalEndDate) + "\n" +
+                           "Duration: " + days + " days\n\n";
+                           
+            if (!additionalDetails.isEmpty()) {
+                receipt += "Additional Items:\n" + additionalDetails + "\n";
+            }
+            
+            receipt += "---------------------------------\n" +
+                       "Subtotal:      ₱" + (machinePrice * days) + "\n" +
+                       "Additional:    ₱" + additionalCost + "\n" +
+                       "TOTAL:         ₱" + totalCost + "\n" +
+                       "---------------------------------\n" +
+                       "Amount Paid:   ₱" + amountPaid + "\n" +
+                       "Change:        ₱" + change + "\n" +
+                       "=================================\n" +
+                       "    Thank you for your rental!   \n" +
+                       "  Please return on or before:    \n" +
+                       "  " + new SimpleDateFormat("yyyy-MM-dd").format(rentalEndDate) + "\n" +
+                       "=================================";
+            
+            // Show receipt
+            JTextArea receiptArea = new JTextArea(receipt);
+            receiptArea.setEditable(false);
+            receiptArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+            JScrollPane scrollPane = new JScrollPane(receiptArea);
+            scrollPane.setPreferredSize(new Dimension(350, 400));
+            
+            JOptionPane.showMessageDialog(null, scrollPane, "Rental Receipt", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Clear form fields
+            clearFields();
         }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
     }
-
-    // ... (the rest of your normal rental process stays here unchanged) ...
-
-} catch (Exception e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
 }
 
-
-
-
+// Helper method to clear form fields
+private void clearFields() {
+    cusname.setText("");
+    connum.setText("");
+    email.setText("");
+    adds.setText("");
+    info.setText("");
+    
     }//GEN-LAST:event_rentActionPerformed
 
     private void cusnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusnameActionPerformed
@@ -1108,9 +1371,9 @@ public class Staff extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addsActionPerformed
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        clearField();
-    }//GEN-LAST:event_jLabel13MouseClicked
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel24MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1151,44 +1414,47 @@ public class Staff extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adds;
-    private javax.swing.JButton bookingmngmnt;
+    private javax.swing.JButton booking;
     private javax.swing.JTextField connum;
     private javax.swing.JTextField cusname;
     private javax.swing.JButton customermngmnt;
     private javax.swing.JButton dashboard;
     private javax.swing.JTextField email;
-    private javax.swing.JButton equipmngmnt;
     private java.awt.TextArea info;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutstaff;
-    private javax.swing.JButton machine1bttn;
-    private javax.swing.JButton machine2bttn;
-    private javax.swing.JButton machine3bttn;
-    private javax.swing.JButton machine4bttn;
-    private javax.swing.JButton machine5bttn;
-    private javax.swing.JButton machine6bttn;
+    private javax.swing.JButton machine1bttn1;
+    private javax.swing.JButton machine2bttn1;
+    private javax.swing.JButton machine3bttn1;
+    private javax.swing.JButton machine4bttn1;
+    private javax.swing.JButton machine5bttn1;
+    private javax.swing.JButton machine6bttn1;
+    private javax.swing.JButton mngequipment;
+    private javax.swing.JButton mngreservation;
     private javax.swing.JButton rent;
-    private javax.swing.JButton reports;
     private javax.swing.JButton usagemonitor;
     // End of variables declaration//GEN-END:variables
 }
